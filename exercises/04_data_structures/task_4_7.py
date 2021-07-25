@@ -16,3 +16,14 @@
 """
 
 mac = "AAAA:BBBB:CCCC"
+
+s = '101010101010101010111011101110111100110011001100'
+
+hex_mac = mac.replace(":", "")
+
+#result = bin(int(hex_mac,16))[2:]
+#print(result == s)
+
+result = '{:b}'.format(int(hex_mac, 16))
+
+print(result)

@@ -26,3 +26,34 @@
 """
 
 ip = "192.168.3.1"
+
+octets = ip.split('.')
+
+# dec_tmplt = '{:8}  ' * 4
+# res_dec = dec_tmplt.format(octets[0],
+#                       octets[1],
+#                       octets[2],
+#                       octets[3])
+#
+# bin_tmplt = '{:08b}  ' * 4
+# res_bin = bin_tmplt.format(int(octets[0]),
+#                       int(octets[1]),
+#                       int(octets[2]),
+#                       int(octets[3]))
+#
+# print(res_dec)
+# print(res_bin)
+
+# oct0 = int(octets[0])
+# oct1 = int(octets[1])
+# oct2 = int(octets[2])
+# oct3 = int(octets[3])
+#
+# result = f'''{oct0:<10}{oct1:<10}{oct2:<10}{oct3:<10}
+# {oct0:>08b}  {oct1:>08b}  {oct2:>08b}  {oct3:>08b}'''
+# print(result)
+
+tmplt = '''{0:<10}{1:<10}{2:<10}{3:<10}
+{0:>08b}  {1:>08b}  {2:>08b}  {3:>08b}'''
+result = tmplt.format(int(octets[0]), int(octets[1]), int(octets[2]), int(octets[3]))
+print(result)
