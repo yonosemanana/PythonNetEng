@@ -45,3 +45,4 @@ for intf in intfs:
                              ' no shutdown\n')
     print(int_conf_new_template)
 
+print("Hello, world!")
