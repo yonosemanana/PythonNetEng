@@ -49,3 +49,42 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+prefix = input('Enter prefix in format "10.1.1.0/24": ')
+network, mask = prefix.split('/')
+
+host_octets = network.split('.') # A list of octets, i.e. strings of decimals
+prefix_len = int(mask.lstrip('/')) # An integer - prefix length
+mask_bin = prefix_len * '1' + (32 - prefix_len) * '0' # The mask as string of binary digits
+
+# Mask 4 octets in decimal (int)
+m1 = int(mask_bin[:8], 2)
+m2 = int(mask_bin[8:16], 2)
+m3 = int(mask_bin[16:24], 2)
+m4 = int(mask_bin[24:], 2)
+
+# Host 4 octets in decimal (int)
+h1 = int(host_octets[0])
+h2 = int(host_octets[1])
+h3 = int(host_octets[2])
+h4 = int(host_octets[3])
+
+
+net_bin = f'{h1:08b}{h2:08b}{h3:08b}{h4:08b}'[:prefix_len] + (32 - prefix_len) * '0' # The network in binary (str)
+
+# Network 4 octets in decimal (int)
+n1 = int(net_bin[:8], 2)
+n2 = int(net_bin[8:16], 2)
+n3 = int(net_bin[16:24], 2)
+n4 = int(net_bin[24:], 2)
+
+tmplt = ('{0:<10}{1:<10}{2:<10}{3:<10}\n'
+            '{0:>08b}  {1:>08b}  {2:>08b}  {3:>08b}')
+
+print('Network:')
+print(tmplt.format(n1, n2, n3, n4))
+
+print()
+print('Mask:')
+print('/' + mask)
+print(tmplt.format(m1, m2, m3, m4))
