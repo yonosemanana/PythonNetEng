@@ -20,3 +20,12 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+output = '{:9}{:20}{}'
+
+with open('CAM_table.txt') as f:
+    for line in f:
+        l = line.lstrip()
+        if l and l[0].isdigit():
+            vlan, mac, _, intf = line.split()
+            print(output.format(vlan, mac, intf))

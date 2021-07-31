@@ -16,4 +16,17 @@
 
 """
 
+from sys import argv
+
+
 ignore = ["duplex", "alias", "configuration"]
+
+
+file_in, file_out = argv[1], argv[2]
+
+with open(file_in) as f_in, open(file_out, 'w') as f_out:
+    for line in f_in:
+        if not line.startswith('!'):
+            words = line.split()
+            if not set(words) & set(ignore):
+                f_out.write(line)
