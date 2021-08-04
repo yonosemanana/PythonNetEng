@@ -1,3 +1,5 @@
+import pprint
+
 # -*- coding: utf-8 -*-
 """
 Задание 9.4
@@ -64,3 +66,38 @@ def ignore_command(command, ignore):
         if word in command:
             ignore_status = True
     return ignore_status
+
+def convert_config_to_dict(config_filename):
+    '''
+    Создать функцию convert_config_to_dict, которая обрабатывает конфигурационный
+    файл коммутатора и возвращает словарь:
+    * Все команды верхнего уровня (глобального режима конфигурации), будут ключами.
+    * Если у команды верхнего уровня есть подкоманды, они должны быть в значении
+      у соответствующего ключа, в виде списка (пробелы в начале строки надо удалить).
+    * Если у команды верхнего уровня нет подкоманд, то значение будет пустым списком
+
+    У функции должен быть один параметр config_filename, который ожидает
+    как аргумент имя конфигурационного файла.
+
+    Проверить работу функции на примере файла config_sw1.txt
+
+    При обработке конфигурационного файла, надо игнорировать строки, которые начинаются
+    с '!', а также строки в которых содержатся слова из списка ignore.
+
+    Для проверки надо ли игнорировать строку, использовать функцию ignore_command.
+    '''
+
+    commands_dict = {}
+
+    with open(config_filename) as config:
+        for line in config:
+            if line.strip() and not line.startswith('!') and not ignore_command(line, ignore):
+                if line[0].isalnum():
+                    global_command = line.strip()
+                    commands_dict[global_command] = []
+                else:
+                    commands_dict[global_command].append(line.strip())
+    return commands_dict
+
+commands_dict = convert_config_to_dict('config_sw1.txt')
+pprint.pprint(commands_dict, sort_dicts=False)
