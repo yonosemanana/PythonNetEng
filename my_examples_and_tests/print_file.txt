@@ -1,0 +1,2 @@
+Hello, world!
+    This is my first time I use print() to write to a file!

@@ -147,6 +147,7 @@ d = {'a' : 1, 'b' : 2}
 
 # This code does work, because with **<name> we can give the function <name> as a dictionary of arguments.
 my_print_d(**d)
+my_print_d(a=10, b=20)
 
 print_dict(**d)
 
