@@ -1,3 +1,8 @@
+from task_11_2 import create_network_map
+from pprint import pprint, pformat
+
+import draw_network_graph
+
 # -*- coding: utf-8 -*-
 """
 Задание 11.2a
@@ -74,9 +79,35 @@
 
 """
 
-infiles = [
-    "sh_cdp_n_sw1.txt",
-    "sh_cdp_n_r1.txt",
-    "sh_cdp_n_r2.txt",
-    "sh_cdp_n_r3.txt",
-]
+def unique_network_map(topology_dict):
+    """
+    Input: a dictionary - result of create_network_map() function.
+    Output: a dictionary without duplicate links. Doesn't matter which one to keep and which to delete.
+    """
+    result = {}
+    for key, value in topology_dict.items():
+        if not value in result.keys():
+            # print(key, value)
+            # print(result)
+            # print(value in result.keys(), key in result.items())
+            result[key] = value
+    return result
+
+if __name__ == '__main__':
+
+    infiles = [
+        "sh_cdp_n_sw1.txt",
+        "sh_cdp_n_r1.txt",
+        "sh_cdp_n_r2.txt",
+        "sh_cdp_n_r3.txt",
+    ]
+
+    topology = create_network_map(infiles)
+    # pprint(topology)
+    # print()
+    # pprint(unique_network_map(topology))
+    unique_topology = unique_network_map(topology)
+    topology_print = pformat(unique_topology)
+    print(type(topology_print), topology_print)
+
+    draw_network_graph.draw_topology(unique_topology, 'mytopology')

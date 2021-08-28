@@ -33,7 +33,15 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
-
+def parse_line(s):
+    """
+    The function parses a data line from 'show cdp neighbor' output from Cisco device.
+    It returns a tuple with three values: neighbor_name, local_interface, neighbor_interface
+    Input example: "R1           Eth 0/1         122           R S I           2811       Eth 0/0"
+    Output example: (R1, Eth0/1, Eth0/0,)
+    """
+    neighbor, loc_intf_type, loc_intf_num, *rest, rem_intf_type, rem_intf_num = s.split()
+    return neighbor, loc_intf_type + loc_intf_num, rem_intf_type + rem_intf_num
 
 def parse_cdp_neighbors(command_output):
     """
@@ -43,7 +51,21 @@ def parse_cdp_neighbors(command_output):
     и с файлами и с выводом с оборудования.
     Плюс учимся работать с таким выводом.
     """
+    command_index = command_output.index('show cdp neighbors')
+    loc_name = command_output[:command_index - 1].strip()
 
+    header_index = command_output.index('Device ID')
+    all_lines = command_output[header_index:].split('\n')[1:]
+    lines = list(filter(lambda s: s.strip() != '', all_lines))
+    neighbors = list(map(parse_line, lines))
+    #print(neighbors)
+
+    result = {}
+    for neighbor in neighbors:
+        rem_name, loc_intf, rem_intf = neighbor
+        result[(loc_name, loc_intf,)] = (rem_name, rem_intf,)
+
+    return result
 
 if __name__ == "__main__":
     with open("sh_cdp_n_sw1.txt") as f:

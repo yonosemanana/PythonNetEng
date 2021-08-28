@@ -1,3 +1,5 @@
+from task_11_1 import parse_cdp_neighbors
+from pprint import pprint
 # -*- coding: utf-8 -*-
 """
 Задание 11.2
@@ -28,9 +30,29 @@ Cгенерировать топологию, которая соответст�
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
-infiles = [
-    "sh_cdp_n_sw1.txt",
-    "sh_cdp_n_r1.txt",
-    "sh_cdp_n_r2.txt",
-    "sh_cdp_n_r3.txt",
-]
+
+def create_network_map(filenames):
+    """
+    Input: a list with names of files containing output of "show cdp neighbors" command.
+    Output: a dictionary describing connections between devices.
+    An example: {("R4", "Fa0/1"): ("R5", "Fa0/1"),
+     ("R4", "Fa0/2"): ("R6", "Fa0/0")}
+    """
+    result = {}
+
+    for name in filenames:
+        with open(name) as f:
+            result.update(parse_cdp_neighbors(f.read()))
+
+    return result
+
+if __name__ == '__main__':
+
+    infiles = [
+        "sh_cdp_n_sw1.txt",
+        "sh_cdp_n_r1.txt",
+        "sh_cdp_n_r2.txt",
+        "sh_cdp_n_r3.txt",
+    ]
+
+    pprint(create_network_map(infiles))
