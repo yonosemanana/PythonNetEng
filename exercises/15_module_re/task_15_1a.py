@@ -1,3 +1,4 @@
+import re
 # -*- coding: utf-8 -*-
 """
 Задание 15.1a
@@ -24,3 +25,44 @@
 а не ввод пользователя.
 
 """
+# def get_ip_from_cfg(config_file):
+#     """
+#     The function receives a file name of the configuration file of a switch or router.
+#     The function returns a dictionary: {interface name: a tuple of strings (ip_address, mask) assigned on the interfaces}
+#     The function uses module re
+#     """
+#     res = {}
+#     regex_int = r'interface (?P<intf>\S+)'
+#     regex_ip = r'ip address (?P<ip>\S+) (?P<mask>\S+)'
+#
+#     with open(config_file) as f:
+#         for line in f:
+#             match_int = re.search(regex_int, line)
+#             if match_int:
+#                 intf = match_int.group('intf')
+#             match_ip = re.search(regex_ip, line)
+#             if match_ip:
+#                 ip, mask = match_ip.groups()
+#                 res[intf] = (ip, mask)
+#     return res
+
+def get_ip_from_cfg(config_file):
+    """
+    The function receives a file name of the configuration file of a switch or router.
+    The function returns a dictionary: {interface name: a tuple of strings (ip_address, mask) assigned on the interfaces}
+    The function uses module re
+    """
+    res = {}
+    regex = (r'interface (?P<intf>\S+)\n'
+             r'(?: .*\n)*'
+             r' ip address (?P<ip>\S+) (?P<mask>\S+)')
+
+    with open(config_file) as f:
+        for m in re.finditer(regex, f.read()):
+            # print(m)
+            # print(m.groups())
+            res[m.group('intf')] = (m.group('ip'), m.group('mask'), )
+    return res
+
+if __name__ == '__main__':
+    print(get_ip_from_cfg('config_r1.txt'))

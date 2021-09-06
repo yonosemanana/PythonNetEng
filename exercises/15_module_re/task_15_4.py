@@ -1,3 +1,4 @@
+import re
 # -*- coding: utf-8 -*-
 """
 Задание 15.4
@@ -24,3 +25,23 @@ interface Loopback0
 
 Проверить работу функции на примере файла config_r1.txt.
 """
+
+def get_ints_without_description(filename):
+    """
+    The function finds interfaces without description in the configuration file.
+    Input: a name of the configuration file of Cisco IOS device.
+    Output: a list of strings with interfaces (without 'interface' keyword) with no description.
+    """
+    res = []
+    regex = re.compile((r'\ninterface (?P<intf>\S+)\n|'
+                        r' description (?P<descr>.*\n)'))
+    with open(filename) as f:
+        for match in regex.finditer(f.read()):
+            if match.lastgroup == 'intf':
+                res.append(match.group('intf'))
+            elif match.lastgroup == 'descr':
+                res.pop()
+
+    return res
+if __name__ == '__main__':
+    print(get_ints_without_description('config_r1.txt'))
