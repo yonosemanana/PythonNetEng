@@ -1,0 +1,9 @@
+---
+fiction:
+  - name: The Lord of the Rings
+    author: J.R.R. Tolkien
+  - name: A Farewell to Arms
+    author: E. Hemingway
+networks:
+  - name: Internet Routing Architecture
+    author: Sam Halabi

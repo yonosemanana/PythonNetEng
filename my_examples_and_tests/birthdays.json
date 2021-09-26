@@ -1,0 +1,14 @@
+{
+  "children" : [
+    {"Name" :  "Billy",
+    "Class" :  "2B",
+    "Birthday" :  "13.07.2006"},
+    {"Name" :  "Sarah",
+    "Class" :  "2C",
+    "Birthday" :  "02.06.2007"},
+    {"Name" :  "Eric",
+    "Class" :  "2A",
+    "Birthday" :  "01.03.2008"}
+
+  ]
+}
