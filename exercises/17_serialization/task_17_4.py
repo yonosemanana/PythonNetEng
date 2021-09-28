@@ -42,6 +42,7 @@ C-3PO,c3po@gmail.com,16/12/2019 17:24
 """
 
 import datetime
+import csv
 
 
 def convert_str_to_datetime(datetime_str):
@@ -56,3 +57,34 @@ def convert_datetime_to_str(datetime_obj):
     Конвертирует строку с датой в формате 11/10/2019 14:05 в объект datetime.
     """
     return datetime.datetime.strftime(datetime_obj, "%d/%m/%Y %H:%M")
+
+def write_last_log_to_csv(source_log, output):
+    """ The functions selects the last change of name for every user from the log file and writes it to the output file in CSV format
+    Input: a name of log file
+    Output: a name of the output file
+    """
+    users = {} # A dictionary with keys = usernames and values = dictionaries with all user parameters (including username)
+
+    with open(source_log) as f_in:
+        csv_dict_reader = csv.DictReader(f_in)
+
+        first_row = next(csv_dict_reader)
+        headers = first_row.keys()
+        users[first_row['Email']] = first_row.copy()
+        for row in csv_dict_reader:
+            if row['Email'] in users:
+                if convert_str_to_datetime(row['Last Changed']) > convert_str_to_datetime(users[row['Email']]['Last Changed']):
+                    users[row['Email']] = row
+            else:
+                users[row['Email']] = row
+
+    # print(users.values())
+
+    with open(output, 'w') as f_out:
+        csv_dict_writer = csv.DictWriter(f_out, fieldnames=headers)
+        csv_dict_writer.writeheader()
+        csv_dict_writer.writerows(users.values())
+
+
+if __name__ == '__main__':
+    write_last_log_to_csv('mail_log.csv', 'mylogoutput.csv')

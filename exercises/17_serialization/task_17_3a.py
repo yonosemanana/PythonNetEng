@@ -33,6 +33,31 @@
 * sh_cdp_n_r6.txt
 
 Проверить работу параметра save_to_filename и записать итоговый словарь
-в файл topology.yaml. Он понадобится в следующем задании.
+в файл topology.yaml.old. Он понадобится в следующем задании.
 
 """
+
+import re
+import yaml
+from task_17_3 import parse_sh_cdp_neighbors
+
+def generate_topology_from_cdp(list_of_files, save_to_filename=None):
+    """
+    Input: a list of filenames with 'show cdp neighbor' output and a name of YAML file to save topology
+    Output: the function returns a dictionary with the topology + writes it to the YAML file
+    """
+    topology = {}
+
+    for filename in list_of_files:
+        with open(filename) as f:
+            topology.update(parse_sh_cdp_neighbors(f.read()))
+
+    if save_to_filename:
+        with open(save_to_filename, 'w') as f:
+            yaml.dump(topology, f)
+
+    return topology
+
+if __name__ == '__main__':
+    filenames = ['sh_cdp_n_sw1.txt', 'sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.txt', 'sh_cdp_n_r4.txt', 'sh_cdp_n_r5.txt', 'sh_cdp_n_r6.txt']
+    print(generate_topology_from_cdp(filenames, save_to_filename='topology.yaml'))

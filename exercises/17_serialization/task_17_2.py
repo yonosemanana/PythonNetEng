@@ -44,8 +44,68 @@
 """
 
 import glob
+import re
+import csv
 
 sh_version_files = glob.glob("sh_vers*")
 # print(sh_version_files)
 
 headers = ["hostname", "ios", "image", "uptime"]
+
+# def parse_sh_version(sh_ver_output):
+#     """
+#     Input: The function receives 'show version' output as a string
+#     Output: The function returns tuple (ios, image, uptime).
+#     An example: ("12.4(5)T", "flash:c2800-advipservicesk9-mz.124-5.T.bin", "5 days, 3 hours, 3 minutes")
+#     """
+#     regex_ios = r'Cisco IOS Software, \S+ \S+ \S+ Version (?P<ios>\S+), RELEASE [\S ]+\n'
+#     regex_uptime = r'\S+ uptime is (?P<uptime>[\S ]+)\n'
+#     regex_image = r'System image file is "(?P<image>\S+)"\n.*'
+#
+#     match = re.search(regex_ios, sh_ver_output)
+#     if match:
+#         ios = match.group('ios')
+#     match = re.search(regex_image, sh_ver_output)
+#     if match:
+#         image = match.group('image')
+#     match = re.search(regex_uptime, sh_ver_output)
+#     if match:
+#         uptime = match.group('uptime')
+#
+#     return ios, image, uptime
+
+def parse_sh_version(sh_ver_output):
+    """
+    Input: The function receives 'show version' output as a string
+    Output: The function returns tuple (ios, image, uptime).
+    An example: ("12.4(5)T", "flash:c2800-advipservicesk9-mz.124-5.T.bin", "5 days, 3 hours, 3 minutes")
+    """
+    regex = (r'Cisco IOS Software, \S+ \S+ \S+ Version (?P<ios>\S+), RELEASE [\S ]+\n.*'
+    r'\S+ uptime is (?P<uptime>[\S ]+)\n.*'
+    r'System image file is "(?P<image>\S+)"\n.*')
+
+    match = re.search(regex, sh_ver_output, re.DOTALL)
+    if match:
+        ios, image, uptime = match.group('ios', 'image', 'uptime')
+
+    return ios, image, uptime
+
+def write_inventory_to_csv(data_filenames, csv_filename):
+    """
+
+    """
+    with open(csv_filename, 'w') as out_f:
+        csv_writer = csv.writer(out_f)
+        csv_writer.writerow(headers)
+
+        for data_file in data_filenames:
+            hostname = re.search('sh_version_(\w+).txt', data_file).group(1)
+            with open(data_file) as f:
+                csv_writer.writerow((hostname,) + parse_sh_version(f.read()))
+
+
+if __name__ == '__main__':
+    write_inventory_to_csv(sh_version_files, 'myrouters_inventory.csv')
+    # with open('sh_version_r1.txt') as f:
+    #     data = parse_sh_version(f.read())
+    #     print(data)

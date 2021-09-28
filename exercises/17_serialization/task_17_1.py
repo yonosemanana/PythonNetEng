@@ -31,3 +31,38 @@ sw3,00:E9:22:11:A6:50,100.1.1.7,3,FastEthernet0/21
 sw2_dhcp_snooping.txt, sw3_dhcp_snooping.txt.
 
 """
+
+import csv
+import re
+
+def write_dhcp_snooping_to_csv(filenames, output):
+    """ The function parses output of 'show ip dhcp snooping' command from multiple files and writes results in a CSV file.
+    Input: filenames - names of files with DHCP snooping information. The names must be in format <device>_dhcp...
+    Output: the function writes results in CSV format to the given output file.
+    Example of output:
+    switch,mac,ip,vlan,interface
+    sw3,00:E9:BC:3F:A6:50,100.1.1.6,3,FastEthernet0/20
+    sw3,00:E9:22:11:A6:50,100.1.1.7,3,FastEthernet0/21
+    """
+    headers = ['switch', 'mac', 'ip', 'vlan', 'interface']
+    lines = []
+
+    regex = re.compile(r'(?P<mac>\S+) +(?P<ip>\S+) +\S+ +\S+ +(?P<vlan>\d+) +(?P<intf>\S+)')
+
+    for filename in filenames:
+        switch = re.search(r'(?P<switch>\w+)_dhcp', filename).group('switch')
+        # print(switch)
+        with open(filename) as f:
+            match = regex.finditer(f.read())
+            for m in match:
+                # print(m.groups())
+                lines.append((switch,) + m.groups())
+
+    with open(output, 'w') as out_f:
+        csv_writer = csv.writer(out_f)
+        csv_writer.writerow(headers)
+        csv_writer.writerows(lines)
+
+if __name__ == '__main__':
+    filenames = ['sw1_dhcp_snooping.txt', 'sw2_dhcp_snooping.txt', 'sw3_dhcp_snooping.txt']
+    write_dhcp_snooping_to_csv(filenames, 'myoutput.txt')

@@ -43,3 +43,38 @@
 > pip install graphviz
 
 """
+
+import yaml
+from draw_network_graph import draw_topology
+from pprint import pprint
+
+def transform_topology(topology_file):
+    """
+    Input: The function receives a name of YAML file with a dictionary of link.
+    Input example:
+    {'R4': {'Fa 0/1': {'R5': 'Fa 0/1'},
+        'Fa 0/2': {'R6': 'Fa 0/0'}},
+     'R5': {'Fa 0/1': {'R4': 'Fa 0/1'}},
+     'R6': {'Fa 0/0': {'R4': 'Fa 0/2'}}}
+    Output: The function returns a dictionary of links in input format for draw_topology() function. The function also deletes duplicate links
+    Output example:
+    {('R4', 'Fa 0/1'): ('R5', 'Fa 0/1'),
+     ('R4', 'Fa 0/2'): ('R6', 'Fa 0/0')}
+    """
+    new_topology = {}
+    with open(topology_file) as f:
+        old_topology = yaml.safe_load(f)
+        # pprint(old_topology)
+
+    for device in old_topology:
+        for local_intf in old_topology[device]:
+            new_key = (device, local_intf,)
+            if new_key not in new_topology.keys() and new_key not in new_topology.values():
+                for key, value in old_topology[device][local_intf].items():
+                    new_topology[new_key] = (key, value,)
+
+    return new_topology
+
+if __name__ == '__main__':
+    # pprint(transform_topology('topology.yaml'))
+    draw_topology(transform_topology('topology.yaml'), out_filename='my_task_17_3b_topology')

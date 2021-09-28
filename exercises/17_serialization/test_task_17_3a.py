@@ -110,7 +110,7 @@ def test_writing_to_yaml_file(tmpdir):
         "R4": {"Eth 0/0": {"SW1": "Eth 0/4"}, "Eth 0/1": {"R5": "Eth 0/1"}},
         "R6": {"Eth 0/1": {"R2": "Eth 0/2"}},
     }
-    dest_filename = tmpdir.mkdir("test_tasks").join("topology.yaml")
+    dest_filename = tmpdir.mkdir("test_tasks").join("topology.yaml.old")
     return_value = task_17_3a.generate_topology_from_cdp(
         list_of_cdp_files, save_to_filename=dest_filename
     )

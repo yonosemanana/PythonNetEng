@@ -38,8 +38,8 @@ def test_function_return_value():
         }
     )
 
-    assert os.path.exists("topology.yaml"), "Файл topology.yaml не существует"
-    return_value = task_17_3b.transform_topology("topology.yaml")
+    assert os.path.exists("topology.yaml.old"), "Файл topology.yaml.old не существует"
+    return_value = task_17_3b.transform_topology("topology.yaml.old")
     assert return_value != None, "Функция ничего не возвращает"
     assert (
         type(return_value) == dict
