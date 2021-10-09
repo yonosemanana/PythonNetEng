@@ -52,6 +52,25 @@ In [13]: t.delete_link(('R5', 'Eth0/0'), ('R3', 'Eth0/2'))
 
 """
 
+class Topology:
+    def __init__(self, topology_dict):
+        self.topology = self._normalize(topology_dict)
+
+    def _normalize(self, topology_dict):
+        topology = {}
+        for local, remote in topology_dict.items():
+            if not topology.get(local) == remote and not topology.get(remote) == local:
+                topology[local] = remote
+        return topology
+
+    def delete_link(self, local, remote):
+        if self.topology.get(local) == remote:
+            self.topology.pop(local)
+        elif self.topology.get(remote) == local:
+            self.topology.pop(remote)
+        else:
+            print('Такого соединения нет')
+
 topology_example = {
     ("R1", "Eth0/0"): ("SW1", "Eth0/1"),
     ("R2", "Eth0/0"): ("SW1", "Eth0/2"),
@@ -63,3 +82,11 @@ topology_example = {
     ("SW1", "Eth0/2"): ("R2", "Eth0/0"),
     ("SW1", "Eth0/3"): ("R3", "Eth0/0"),
 }
+
+if __name__ == '__main__':
+    t = Topology(topology_example)
+    print(t.topology)
+    t.delete_link(('R5', 'Eth0/0'), ('R3', 'Eth0/2'))
+    print(t.topology)
+    t.delete_link(("R1", "Eth0/0"), ("SW1", "Eth0/1"))
+    print(t.topology)

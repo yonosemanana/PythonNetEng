@@ -47,3 +47,67 @@ self._write_line(line)
 
 Он не должен делать ничего другого.
 """
+
+import telnetlib
+import time
+
+class CiscoTelnet:
+    def __init__(self, ip, username, password, secret):
+        self.ip = ip
+        self.username = username
+        self.password = password
+        self.secret = secret
+
+        # self.session = telnetlib.Telnet(ip)
+        # self.session.read_until(b'Username: ')
+        # self.session.write(username.encode('ascii') + b'\n')
+        # self.session.read_until(b'Password: ')
+        # self.session.write(password.encode('ascii') + b'\n')
+        # self.session.read_until(b'>')
+        # self.session.write(b'enable\n')
+        # self.session.read_until(b'Password: ')
+        # self.session.write(secret.encode('ascii') + b'\n')
+
+        self.session = telnetlib.Telnet(ip)
+        self.session.read_until(b'Username: ')
+        self._write_line(username)
+        self.session.read_until(b'Password: ')
+        self._write_line(password)
+        self.session.read_until(b'>')
+        self._write_line('enable')
+        self.session.read_until(b'Password: ')
+        self._write_line(secret)
+        self.session.read_until(b'#')
+
+        self._write_line('terminal length 0')
+        # time.sleep(1)
+        # self.session.read_very_eager()
+        self.session.read_until(b'#')
+
+
+    def _write_line(self, command):
+        self.session.write(command.encode('ascii') + b'\n')
+
+    def send_show_command(self, show_command):
+        self._write_line(show_command)
+
+        # time.sleep(1)
+        # return self.session.read_very_eager().decode('utf-8')
+
+        return self.session.read_until(b'#').decode('utf-8')
+
+
+if __name__ == '__main__':
+    # t = CiscoTelnet('192.168.100.1', 'cisco', 'cisco', 'cisco')
+    # print(t)
+    params = {'ip': '192.168.100.1',
+              'username': 'cisco',
+              'password': 'cisco',
+              'secret': 'cisco'}
+    t = CiscoTelnet(**params)
+
+    ver = t.send_show_command('show version')
+    print(ver)
+
+    int_br = t.send_show_command('sh ip int br')
+    print(int_br)

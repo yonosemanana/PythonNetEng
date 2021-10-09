@@ -50,3 +50,52 @@ up      \r\nEthernet0/1                192.168.200.1   YES NVRAM  up...'
 
 
 """
+
+import telnetlib
+import time
+import ntc_templates.parse
+import os
+
+class CiscoTelnet:
+    def __init__(self, ip, username, password, secret):
+        self.session = telnetlib.Telnet(ip)
+        self.session.read_until(b'Username: ')
+        self._write_line(username)
+        self.session.read_until(b'Password: ')
+        self._write_line(password)
+        self.session.read_until(b'>')
+        self._write_line('enable')
+        self.session.read_until(b'Password: ')
+        self._write_line(secret)
+        self.session.read_until(b'#')
+        self._write_line('terminal length 0')
+        time.sleep(1)
+        self.session.read_very_eager()
+
+    def _write_line(self, command):
+        self.session.write(command.encode('ascii') + b'\n')
+
+    def send_show_command(self, show_command, parse=True, templates='templates', index='index'):
+        self._write_line(show_command)
+        time.sleep(1)
+        output = self.session.read_very_eager().decode('utf-8')
+
+        os.environ['NTC_TEMPLATES_DIR'] = templates
+        if parse:
+            return ntc_templates.parse.parse_output(platform='cisco_ios', command=show_command, data=output)
+        else:
+            return output
+
+if __name__ == '__main__':
+    params = {'ip': '192.168.100.1',
+              'username': 'cisco',
+              'password': 'cisco',
+              'secret': 'cisco'}
+    t = CiscoTelnet(**params)
+
+    ver = t.send_show_command('show version', parse=False)
+    print(ver)
+
+    int_br = t.send_show_command('sh ip int br', parse=True)
+    print(int_br)
+
