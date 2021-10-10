@@ -70,6 +70,7 @@ import time
 import ntc_templates.parse
 import os
 import re
+from pprint import pprint
 
 class CiscoTelnet:
     def __init__(self, ip, username, password, secret):
@@ -129,10 +130,17 @@ class CiscoTelnet:
 
 
 if __name__ == '__main__':
+    # params = {'ip': '192.168.100.2',
+    #           'username': 'cisco',
+    #           'password': 'cisco',
+    #           'secret': 'cisco'}
+
+    password = os.environ.get('CISCO_PASSWORD')
+    secret = os.environ.get('CISCO_SECRET')
     params = {'ip': '192.168.100.2',
               'username': 'cisco',
-              'password': 'cisco',
-              'secret': 'cisco'}
+              'password': password,
+              'secret': secret}
     t = CiscoTelnet(**params)
 
     # ver = t.send_show_command('show version', parse=False)
