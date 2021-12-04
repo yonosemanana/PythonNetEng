@@ -48,5 +48,43 @@ Out[16]: 'config term\nEnter configuration commands, one per line.  End with CNT
 
 """
 
+from pprint import pprint
+from task_18_1 import send_show_command
+from task_18_2 import send_config_commands
+
+def send_commands(device, **kwargs):
+    """
+
+    """
+    # print(kwargs)
+    res = ''
+
+    if 'show' in kwargs and 'config' not in kwargs:
+        res = send_show_command(device, kwargs['show'])
+    elif 'config' in kwargs and 'show' not in kwargs:
+        res = send_config_commands(device, kwargs['config'])
+    else:
+        raise ValueError
+
+    return res
+
 commands = ["logging 10.255.255.1", "logging buffered 20010", "no logging console"]
 command = "sh ip int br"
+
+
+if __name__ == '__main__':
+    device = {
+       'device_type': 'cisco_ios',
+        'host': '192.168.100.2',
+        'username': 'cisco',
+        'password': 'cisco',
+        'secret': 'cisco',
+        'timeout': 10
+    }
+    res1 = send_commands(device, config=commands)
+    pprint(res1)
+    res2 = send_commands(device, show=command)
+    pprint(res2)
+    # res3 = send_commands(device, command)
+    # res4 = send_commands(device, commands)
+    res5 = send_commands(device, show='show ip int br', config=['router bgp 1'])

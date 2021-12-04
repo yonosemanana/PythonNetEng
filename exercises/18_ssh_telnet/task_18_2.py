@@ -45,4 +45,36 @@ R1#
 с помощью функции send_config_commands.
 """
 
+import yaml
+from netmiko import ConnectHandler
+from netmiko.ssh_exception import SSHException
+
+def send_config_commands(device, commands):
+    """
+    :params: device - a dictionary with the params to SSH to the device
+    :params: command - a command (string) to be executed on the device
+    """
+    res = ''
+    try:
+        with ConnectHandler(**device) as ssh:
+            ssh.enable()
+            res = ssh.send_config_set(commands)
+
+            # config_check = ssh.send_command('show run')
+            # print(config_check)
+
+    except SSHException as error:
+        print(error)
+
+    return res
+
 commands = ["logging 10.255.255.1", "logging buffered 20010", "no logging console"]
+
+
+if __name__ == '__main__':
+    with open('devices.yaml') as f:
+        devices = yaml.safe_load(f)
+        # print(devices)
+
+    for device in devices:
+        print(send_config_commands(device, commands))

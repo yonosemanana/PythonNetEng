@@ -18,6 +18,21 @@
 
 """
 import yaml
+import netmiko
+
+def send_show_command(device, command):
+    """
+    :params: device - a dictionary with the params to SSH to the device
+    :params: command - a command (string) to be executed on the device
+    """
+    res = ''
+
+    with netmiko.ConnectHandler(**device) as connect:
+        res = connect.send_command(command)
+        # print(res)
+
+    return res
+
 
 
 if __name__ == "__main__":

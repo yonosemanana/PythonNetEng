@@ -51,7 +51,66 @@ In [12]: pprint(result)
 """
 
 # списки команд с ошибками и без:
+
+from pprint import pprint
+from netmiko import ConnectHandler
+from netmiko.ssh_exception import SSHException
+import re
+
+def send_config_commands(device, commands, log=True):
+    """
+    :params: device - a dictionary with the params to SSH to the device
+    :params: command - a command (string) to be executed on the device
+    :params: log - whether print info about the current connection or not (default=True)
+    """
+    res_okay = {}
+    res_errors = {}
+
+    err_msg_template = 'Команда "{command}" выполнилась с ошибкой "{error}" на устройстве {device}'
+
+    try:
+        with ConnectHandler(**device) as ssh:
+            if log:
+                print(f'Подключаюсь к {device["host"]}...')
+            ssh.enable()
+
+            for command in commands:
+                res = ssh.send_config_set(command)
+                m = re.search('% .*\n', res)
+                if m:
+                    res_errors[command] = res
+                    print(err_msg_template.format(command=command, error=m.group().strip(), device=ssh.host))
+
+                    question = input('Продолжать выполнять команды? [y]/n: ')
+                    if question in ['n', 'no']:
+                        break
+                    else:
+                        continue
+                else:
+                    res_okay[command] = res
+
+    except SSHException as error:
+        print(error)
+
+    return res_okay, res_errors
+
+
+# списки команд с ошибками и без:
 commands_with_errors = ["logging 0255.255.1", "logging", "a"]
 correct_commands = ["logging buffered 20010", "ip http server"]
 
 commands = commands_with_errors + correct_commands
+
+
+if __name__ == '__main__':
+    device = {
+       'device_type': 'cisco_ios',
+        'host': '192.168.100.2',
+        'username': 'cisco',
+        'password': 'cisco',
+        'secret': 'cisco',
+        'timeout': 10
+    }
+    commands_ok, commands_err = send_config_commands(device, commands)
+    pprint(commands_ok)
+    pprint(commands_err)
