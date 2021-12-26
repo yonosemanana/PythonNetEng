@@ -1,0 +1,276 @@
+DNS server: 8.8.8.8 - Record: m.hp.com - Type 'A': e100.x.akamaiedge.net. 20 IN A 184.86.114.123
+DNS server: 8.8.8.8 - Record: cv.hp.com - Type 'A': cv.hp.com. 3600 IN A 192.6.15.19
+DNS server: 8.8.8.8 - Record: e2.hp.com - Type 'A': e2.hp.com. 3600 IN A 66.151.141.109
+e2.hp.com. 3600 IN A 12.239.121.36
+e2.hp.com. 3600 IN A 12.239.121.38
+e2.hp.com. 3600 IN A 12.239.121.37
+e2.hp.com. 3600 IN A 66.151.141.15
+e2.hp.com. 3600 IN A 66.151.141.14
+DNS server: 8.8.8.8 - Record: on.hp.com - Type 'A': on.hp.com. 3600 IN A 209.167.231.15
+DNS server: 8.8.8.8 - Record: ux.hp.com - Type 'A': hp-sites-prod-65-westus2-appgateway1-publicip.westus2.cloudapp.azure.com. 10 IN A 40.91.91.76
+DNS server: 8.8.8.8 - Record: m.hp.com - Type 'CNAME': m.hp.com. 300 IN CNAME m.hp.com.edgekey.net.
+DNS server: 8.8.8.8 - Record: sf.hp.com - Type 'CNAME': sf.hp.com. 3586 IN CNAME m2425sso.nsr.hp.com.
+DNS server: 8.8.8.8 - Record: ux.hp.com - Type 'CNAME': ux.hp.com. 3234 IN CNAME hp-sites-prod-65.adobecqms.net.
+DNS server: 8.8.8.8 - Record: e2.hp.com - Type 'TXT': e2.hp.com. 2350 IN TXT "v=spf1 ip4:66.151.141.15 ip4:66.151.141.14 ip4:66.151.141.109 ip4:12.239.121.36 ip4:12.239.121.38 ip4:12.239.121.37 -all"
+DNS server: 8.8.8.8 - Record: id.hp.com - Type 'TXT': id.hp.com. 300 IN TXT "v=spf1 a a:o6.id.hp.com a:o7.ptr2651.id.hp.com ip4:198.37.150.186 ip4:167.89.47.106 ~all"
+DNS server: 8.8.8.8 - Record: on.hp.com - Type 'TXT': on.hp.com. 741 IN TXT "v=spf1 include:_netblocks.eloqua.com -all"
+DNS server: 8.8.8.8 - Record: cv.hp.com - Type 'MX': cv.hp.com. 300 IN MX 110 us-smtp-inbound-1.mimecast.com.
+cv.hp.com. 300 IN MX 100 smtp3.hp.com.
+DNS server: 8.8.8.8 - Record: fc.hp.com - Type 'MX': fc.hp.com. 300 IN MX 100 smtp3.hp.com.
+fc.hp.com. 300 IN MX 110 us-smtp-inbound-1.mimecast.com.
+DNS server: 8.8.8.8 - Record: gr.hp.com - Type 'MX': gr.hp.com. 300 IN MX 110 us-smtp-inbound-1.mimecast.com.
+gr.hp.com. 300 IN MX 100 smtp3.hp.com.
+DNS server: 8.8.8.8 - Record: on.hp.com - Type 'MX': on.hp.com. 300 IN MX 10 mail.en25.com.
+DNS server: 8.8.8.8 - Record: ce.hp.com - Type 'NS': ce.hp.com. 3217 IN NS ns1.hp.com.
+ce.hp.com. 3217 IN NS ns3.hp.com.
+ce.hp.com. 3217 IN NS ns4.hp.com.
+ce.hp.com. 3217 IN NS ns5.hp.com.
+ce.hp.com. 3217 IN NS ns6.hp.com.
+ce.hp.com. 3217 IN NS ns2.hp.com.
+DNS server: 8.8.8.8 - Record: cv.hp.com - Type 'NS': cv.hp.com. 3600 IN NS ns3.hp.com.
+cv.hp.com. 3600 IN NS ns2.hp.com.
+cv.hp.com. 3600 IN NS ns4.hp.com.
+cv.hp.com. 3600 IN NS ns6.hp.com.
+cv.hp.com. 3600 IN NS ns5.hp.com.
+cv.hp.com. 3600 IN NS ns1.hp.com.
+DNS server: 8.8.8.8 - Record: e2.hp.com - Type 'NS': e2.hp.com. 3600 IN NS ns6.hp.com.
+e2.hp.com. 3600 IN NS ns1.hp.com.
+e2.hp.com. 3600 IN NS ns2.hp.com.
+e2.hp.com. 3600 IN NS ns3.hp.com.
+e2.hp.com. 3600 IN NS ns4.hp.com.
+e2.hp.com. 3600 IN NS ns5.hp.com.
+DNS server: 8.8.8.8 - Record: fc.hp.com - Type 'NS': fc.hp.com. 3600 IN NS ns4.hp.com.
+fc.hp.com. 3600 IN NS ns3.hp.com.
+fc.hp.com. 3600 IN NS ns6.hp.com.
+fc.hp.com. 3600 IN NS ns2.hp.com.
+fc.hp.com. 3600 IN NS ns1.hp.com.
+fc.hp.com. 3600 IN NS ns5.hp.com.
+DNS server: 8.8.8.8 - Record: gr.hp.com - Type 'NS': gr.hp.com. 3600 IN NS ns4.hp.com.
+gr.hp.com. 3600 IN NS ns6.hp.com.
+gr.hp.com. 3600 IN NS ns3.hp.com.
+gr.hp.com. 3600 IN NS ns5.hp.com.
+gr.hp.com. 3600 IN NS ns1.hp.com.
+gr.hp.com. 3600 IN NS ns2.hp.com.
+DNS server: 8.8.8.8 - Record: id.hp.com - Type 'NS': id.hp.com. 60 IN NS ns-1457.awsdns-54.org.
+id.hp.com. 60 IN NS ns-1842.awsdns-38.co.uk.
+id.hp.com. 60 IN NS ns-416.awsdns-52.com.
+id.hp.com. 60 IN NS ns-554.awsdns-05.net.
+DNS server: 8.8.8.8 - Record: om.hp.com - Type 'NS': om.hp.com. 6679 IN NS ns6.hp.com.
+om.hp.com. 6679 IN NS ns5.hp.com.
+om.hp.com. 6679 IN NS ns1.hp.com.
+om.hp.com. 6679 IN NS ns3.hp.com.
+om.hp.com. 6679 IN NS ns2.hp.com.
+om.hp.com. 6679 IN NS ns4.hp.com.
+DNS server: 8.8.8.8 - Record: sc.hp.com - Type 'NS': sc.hp.com. 2350 IN NS ns3.hp.com.
+sc.hp.com. 2350 IN NS ns1.hp.com.
+sc.hp.com. 2350 IN NS ns2.hp.com.
+sc.hp.com. 2350 IN NS ns6.hp.com.
+sc.hp.com. 2350 IN NS ns5.hp.com.
+sc.hp.com. 2350 IN NS ns4.hp.com.
+DNS server: 1.1.1.1 - Record: m.hp.com - Type 'A': e100.x.akamaiedge.net. 20 IN A 104.81.107.34
+DNS server: 1.1.1.1 - Record: cv.hp.com - Type 'A': cv.hp.com. 2349 IN A 192.6.15.19
+DNS server: 1.1.1.1 - Record: e2.hp.com - Type 'A': e2.hp.com. 2346 IN A 66.151.141.15
+e2.hp.com. 2346 IN A 12.239.121.38
+e2.hp.com. 2346 IN A 12.239.121.36
+e2.hp.com. 2346 IN A 66.151.141.109
+e2.hp.com. 2346 IN A 66.151.141.14
+e2.hp.com. 2346 IN A 12.239.121.37
+DNS server: 1.1.1.1 - Record: on.hp.com - Type 'A': on.hp.com. 3072 IN A 209.167.231.15
+DNS server: 1.1.1.1 - Record: ux.hp.com - Type 'A': hp-sites-prod-65-westus2-appgateway1-publicip.westus2.cloudapp.azure.com. 10 IN A 40.91.91.76
+DNS server: 1.1.1.1 - Record: m.hp.com - Type 'CNAME': m.hp.com. 300 IN CNAME m.hp.com.edgekey.net.
+DNS server: 1.1.1.1 - Record: sf.hp.com - Type 'CNAME': sf.hp.com. 731 IN CNAME m2425sso.nsr.hp.com.
+DNS server: 1.1.1.1 - Record: ux.hp.com - Type 'CNAME': ux.hp.com. 3600 IN CNAME hp-sites-prod-65.adobecqms.net.
+DNS server: 1.1.1.1 - Record: e2.hp.com - Type 'TXT': e2.hp.com. 3212 IN TXT "v=spf1 ip4:66.151.141.15 ip4:66.151.141.14 ip4:66.151.141.109 ip4:12.239.121.36 ip4:12.239.121.38 ip4:12.239.121.37 -all"
+DNS server: 1.1.1.1 - Record: id.hp.com - Type 'TXT': id.hp.com. 300 IN TXT "v=spf1 a a:o6.id.hp.com a:o7.ptr2651.id.hp.com ip4:198.37.150.186 ip4:167.89.47.106 ~all"
+DNS server: 1.1.1.1 - Record: on.hp.com - Type 'TXT': on.hp.com. 2349 IN TXT "v=spf1 include:_netblocks.eloqua.com -all"
+DNS server: 1.1.1.1 - Record: cv.hp.com - Type 'MX': cv.hp.com. 300 IN MX 100 smtp3.hp.com.
+cv.hp.com. 300 IN MX 110 us-smtp-inbound-1.mimecast.com.
+DNS server: 1.1.1.1 - Record: fc.hp.com - Type 'MX': fc.hp.com. 300 IN MX 110 us-smtp-inbound-1.mimecast.com.
+fc.hp.com. 300 IN MX 100 smtp3.hp.com.
+DNS server: 1.1.1.1 - Record: gr.hp.com - Type 'MX': gr.hp.com. 300 IN MX 100 smtp3.hp.com.
+gr.hp.com. 300 IN MX 110 us-smtp-inbound-1.mimecast.com.
+DNS server: 1.1.1.1 - Record: on.hp.com - Type 'MX': on.hp.com. 300 IN MX 10 mail.en25.com.
+DNS server: 1.1.1.1 - Record: ce.hp.com - Type 'NS': ce.hp.com. 3210 IN NS ns2.hp.com.
+ce.hp.com. 3210 IN NS ns1.hp.com.
+ce.hp.com. 3210 IN NS ns3.hp.com.
+ce.hp.com. 3210 IN NS ns6.hp.com.
+ce.hp.com. 3210 IN NS ns5.hp.com.
+ce.hp.com. 3210 IN NS ns4.hp.com.
+DNS server: 1.1.1.1 - Record: cv.hp.com - Type 'NS': cv.hp.com. 3600 IN NS ns1.hp.com.
+cv.hp.com. 3600 IN NS ns5.hp.com.
+cv.hp.com. 3600 IN NS ns4.hp.com.
+cv.hp.com. 3600 IN NS ns3.hp.com.
+cv.hp.com. 3600 IN NS ns2.hp.com.
+cv.hp.com. 3600 IN NS ns6.hp.com.
+DNS server: 1.1.1.1 - Record: e2.hp.com - Type 'NS': e2.hp.com. 3212 IN NS ns2.hp.com.
+e2.hp.com. 3212 IN NS ns1.hp.com.
+e2.hp.com. 3212 IN NS ns3.hp.com.
+e2.hp.com. 3212 IN NS ns4.hp.com.
+e2.hp.com. 3212 IN NS ns5.hp.com.
+e2.hp.com. 3212 IN NS ns6.hp.com.
+DNS server: 1.1.1.1 - Record: fc.hp.com - Type 'NS': fc.hp.com. 3212 IN NS ns5.hp.com.
+fc.hp.com. 3212 IN NS ns1.hp.com.
+fc.hp.com. 3212 IN NS ns2.hp.com.
+fc.hp.com. 3212 IN NS ns4.hp.com.
+fc.hp.com. 3212 IN NS ns6.hp.com.
+fc.hp.com. 3212 IN NS ns3.hp.com.
+DNS server: 1.1.1.1 - Record: gr.hp.com - Type 'NS': gr.hp.com. 2348 IN NS ns1.hp.com.
+gr.hp.com. 2348 IN NS ns3.hp.com.
+gr.hp.com. 2348 IN NS ns6.hp.com.
+gr.hp.com. 2348 IN NS ns4.hp.com.
+gr.hp.com. 2348 IN NS ns2.hp.com.
+gr.hp.com. 2348 IN NS ns5.hp.com.
+DNS server: 1.1.1.1 - Record: id.hp.com - Type 'NS': id.hp.com. 60 IN NS ns-1457.awsdns-54.org.
+id.hp.com. 60 IN NS ns-1842.awsdns-38.co.uk.
+id.hp.com. 60 IN NS ns-416.awsdns-52.com.
+id.hp.com. 60 IN NS ns-554.awsdns-05.net.
+DNS server: 1.1.1.1 - Record: om.hp.com - Type 'NS': om.hp.com. 3508 IN NS ns3.hp.com.
+om.hp.com. 3508 IN NS ns2.hp.com.
+om.hp.com. 3508 IN NS ns4.hp.com.
+om.hp.com. 3508 IN NS ns6.hp.com.
+om.hp.com. 3508 IN NS ns1.hp.com.
+om.hp.com. 3508 IN NS ns5.hp.com.
+DNS server: 1.1.1.1 - Record: sc.hp.com - Type 'NS': sc.hp.com. 3600 IN NS ns1.hp.com.
+sc.hp.com. 3600 IN NS ns5.hp.com.
+sc.hp.com. 3600 IN NS ns3.hp.com.
+sc.hp.com. 3600 IN NS ns6.hp.com.
+sc.hp.com. 3600 IN NS ns4.hp.com.
+sc.hp.com. 3600 IN NS ns2.hp.com.
+DNS server: 4.2.2.2 - Record: m.hp.com - Type 'A': e100.x.akamaiedge.net. 10 IN A 23.67.141.183
+DNS server: 4.2.2.2 - Record: w.hp.com - Type 'A': w.hp.com. 10 IN A 23.217.138.108
+w.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: cv.hp.com - Type 'A': cv.hp.com. 3600 IN A 192.6.15.19
+DNS server: 4.2.2.2 - Record: e2.hp.com - Type 'A': e2.hp.com. 3600 IN A 12.239.121.36
+e2.hp.com. 3600 IN A 12.239.121.38
+e2.hp.com. 3600 IN A 12.239.121.37
+e2.hp.com. 3600 IN A 66.151.141.15
+e2.hp.com. 3600 IN A 66.151.141.14
+e2.hp.com. 3600 IN A 66.151.141.109
+DNS server: 4.2.2.2 - Record: my.hp.com - Type 'A': my.hp.com. 10 IN A 23.217.138.108
+my.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: on.hp.com - Type 'A': on.hp.com. 3600 IN A 209.167.231.15
+DNS server: 4.2.2.2 - Record: ux.hp.com - Type 'A': hp-sites-prod-65-westus2-appgateway1-publicip.westus2.cloudapp.azure.com. 10 IN A 40.91.91.76
+DNS server: 4.2.2.2 - Record: wa.hp.com - Type 'A': wa.hp.com. 10 IN A 23.217.138.108
+wa.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wb.hp.com - Type 'A': wb.hp.com. 10 IN A 23.217.138.108
+wb.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wc.hp.com - Type 'A': wc.hp.com. 10 IN A 23.217.138.108
+wc.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wd.hp.com - Type 'A': wd.hp.com. 10 IN A 23.217.138.108
+wd.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: we.hp.com - Type 'A': we.hp.com. 10 IN A 23.217.138.108
+we.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wf.hp.com - Type 'A': wf.hp.com. 10 IN A 23.217.138.108
+wf.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wg.hp.com - Type 'A': wg.hp.com. 10 IN A 23.217.138.108
+wg.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wh.hp.com - Type 'A': wh.hp.com. 10 IN A 23.217.138.108
+wh.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wi.hp.com - Type 'A': wi.hp.com. 10 IN A 23.217.138.108
+wi.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wj.hp.com - Type 'A': wj.hp.com. 10 IN A 23.217.138.108
+wj.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wk.hp.com - Type 'A': wk.hp.com. 10 IN A 23.217.138.108
+wk.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wl.hp.com - Type 'A': wl.hp.com. 10 IN A 23.217.138.108
+wl.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wm.hp.com - Type 'A': wm.hp.com. 10 IN A 23.217.138.108
+wm.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wn.hp.com - Type 'A': wn.hp.com. 10 IN A 23.217.138.108
+wn.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wo.hp.com - Type 'A': wo.hp.com. 10 IN A 23.217.138.108
+wo.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wp.hp.com - Type 'A': wp.hp.com. 10 IN A 23.217.138.108
+wp.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wq.hp.com - Type 'A': wq.hp.com. 10 IN A 23.217.138.108
+wq.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wr.hp.com - Type 'A': wr.hp.com. 10 IN A 23.217.138.108
+wr.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: ws.hp.com - Type 'A': ws.hp.com. 10 IN A 23.217.138.108
+ws.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wt.hp.com - Type 'A': wt.hp.com. 10 IN A 23.217.138.108
+wt.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wu.hp.com - Type 'A': wu.hp.com. 10 IN A 23.217.138.108
+wu.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wv.hp.com - Type 'A': wv.hp.com. 10 IN A 23.217.138.108
+wv.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: ww.hp.com - Type 'A': ww.hp.com. 10 IN A 23.217.138.108
+ww.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wx.hp.com - Type 'A': wx.hp.com. 10 IN A 23.217.138.108
+wx.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: wz.hp.com - Type 'A': wz.hp.com. 10 IN A 23.217.138.108
+wz.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w0.hp.com - Type 'A': w0.hp.com. 10 IN A 23.217.138.108
+w0.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w1.hp.com - Type 'A': w1.hp.com. 10 IN A 23.217.138.108
+w1.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w2.hp.com - Type 'A': w2.hp.com. 10 IN A 23.217.138.108
+w2.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w3.hp.com - Type 'A': w3.hp.com. 10 IN A 23.217.138.108
+w3.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w6.hp.com - Type 'A': w6.hp.com. 10 IN A 23.217.138.108
+w6.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w7.hp.com - Type 'A': w7.hp.com. 10 IN A 23.217.138.108
+w7.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w8.hp.com - Type 'A': w8.hp.com. 10 IN A 23.217.138.108
+w8.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w9.hp.com - Type 'A': w9.hp.com. 10 IN A 23.217.138.108
+w9.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: w-.hp.com - Type 'A': w-.hp.com. 10 IN A 23.217.138.108
+w-.hp.com. 10 IN A 23.202.231.167
+DNS server: 4.2.2.2 - Record: m.hp.com - Type 'CNAME': m.hp.com. 300 IN CNAME m.hp.com.edgekey.net.
+DNS server: 4.2.2.2 - Record: sf.hp.com - Type 'CNAME': sf.hp.com. 3578 IN CNAME m2425sso.nsr.hp.com.
+DNS server: 4.2.2.2 - Record: ux.hp.com - Type 'CNAME': ux.hp.com. 2326 IN CNAME hp-sites-prod-65.adobecqms.net.
+DNS server: 4.2.2.2 - Record: e2.hp.com - Type 'TXT': e2.hp.com. 3600 IN TXT "v=spf1 ip4:66.151.141.15 ip4:66.151.141.14 ip4:66.151.141.109 ip4:12.239.121.36 ip4:12.239.121.38 ip4:12.239.121.37 -all"
+DNS server: 4.2.2.2 - Record: on.hp.com - Type 'TXT': on.hp.com. 3600 IN TXT "v=spf1 include:_netblocks.eloqua.com -all"
+DNS server: 4.2.2.2 - Record: fc.hp.com - Type 'MX': fc.hp.com. 300 IN MX 100 smtp3.hp.com.
+fc.hp.com. 300 IN MX 110 us-smtp-inbound-1.mimecast.com.
+DNS server: 4.2.2.2 - Record: gr.hp.com - Type 'MX': gr.hp.com. 300 IN MX 110 us-smtp-inbound-1.mimecast.com.
+gr.hp.com. 300 IN MX 100 smtp3.hp.com.
+DNS server: 4.2.2.2 - Record: on.hp.com - Type 'MX': on.hp.com. 300 IN MX 10 mail.en25.com.
+DNS server: 4.2.2.2 - Record: ce.hp.com - Type 'NS': ce.hp.com. 3600 IN NS ns2.hp.com.
+ce.hp.com. 3600 IN NS ns1.hp.com.
+ce.hp.com. 3600 IN NS ns3.hp.com.
+ce.hp.com. 3600 IN NS ns5.hp.com.
+ce.hp.com. 3600 IN NS ns4.hp.com.
+ce.hp.com. 3600 IN NS ns6.hp.com.
+DNS server: 4.2.2.2 - Record: cv.hp.com - Type 'NS': cv.hp.com. 3600 IN NS ns3.hp.com.
+cv.hp.com. 3600 IN NS ns6.hp.com.
+cv.hp.com. 3600 IN NS ns1.hp.com.
+cv.hp.com. 3600 IN NS ns5.hp.com.
+cv.hp.com. 3600 IN NS ns2.hp.com.
+cv.hp.com. 3600 IN NS ns4.hp.com.
+DNS server: 4.2.2.2 - Record: e2.hp.com - Type 'NS': e2.hp.com. 3206 IN NS ns4.hp.com.
+e2.hp.com. 3206 IN NS ns1.hp.com.
+e2.hp.com. 3206 IN NS ns3.hp.com.
+e2.hp.com. 3206 IN NS ns6.hp.com.
+e2.hp.com. 3206 IN NS ns2.hp.com.
+e2.hp.com. 3206 IN NS ns5.hp.com.
+DNS server: 4.2.2.2 - Record: fc.hp.com - Type 'NS': fc.hp.com. 2352 IN NS ns5.hp.com.
+fc.hp.com. 2352 IN NS ns2.hp.com.
+fc.hp.com. 2352 IN NS ns6.hp.com.
+fc.hp.com. 2352 IN NS ns4.hp.com.
+fc.hp.com. 2352 IN NS ns3.hp.com.
+fc.hp.com. 2352 IN NS ns1.hp.com.
+DNS server: 4.2.2.2 - Record: gr.hp.com - Type 'NS': gr.hp.com. 3205 IN NS ns6.hp.com.
+gr.hp.com. 3205 IN NS ns4.hp.com.
+gr.hp.com. 3205 IN NS ns2.hp.com.
+gr.hp.com. 3205 IN NS ns5.hp.com.
+gr.hp.com. 3205 IN NS ns1.hp.com.
+gr.hp.com. 3205 IN NS ns3.hp.com.
+DNS server: 4.2.2.2 - Record: id.hp.com - Type 'NS': id.hp.com. 60 IN NS ns-1457.awsdns-54.org.
+id.hp.com. 60 IN NS ns-1842.awsdns-38.co.uk.
+id.hp.com. 60 IN NS ns-416.awsdns-52.com.
+id.hp.com. 60 IN NS ns-554.awsdns-05.net.
+DNS server: 4.2.2.2 - Record: om.hp.com - Type 'NS': om.hp.com. 1560 IN NS ns1.hp.com.
+om.hp.com. 1560 IN NS ns6.hp.com.
+om.hp.com. 1560 IN NS ns5.hp.com.
+om.hp.com. 1560 IN NS ns2.hp.com.
+om.hp.com. 1560 IN NS ns3.hp.com.
+om.hp.com. 1560 IN NS ns4.hp.com.
+DNS server: 4.2.2.2 - Record: sc.hp.com - Type 'NS': sc.hp.com. 3600 IN NS ns6.hp.com.
+sc.hp.com. 3600 IN NS ns4.hp.com.
+sc.hp.com. 3600 IN NS ns1.hp.com.
+sc.hp.com. 3600 IN NS ns2.hp.com.
+sc.hp.com. 3600 IN NS ns3.hp.com.
+sc.hp.com. 3600 IN NS ns5.hp.com.

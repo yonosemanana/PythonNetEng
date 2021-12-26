@@ -37,3 +37,5 @@ venv*
 answer_task*
 /exercises/11_modules/mytopology
 /exercises/11_modules/mytopology.svg
+/my_examples_and_tests/all_bluecat_zones*
+/my_examples_and_tests/CompareDNSresolvers_new.py
