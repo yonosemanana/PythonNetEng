@@ -42,8 +42,44 @@ router ospf 1
 
 # Этот словарь нужен только для проверки работа кода, в нем можно менять IP-адреса
 # тест берет адреса из файла devices.yaml
+import logging
+import yaml
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from netmiko import ConnectHandler
+
+def send_show_command(device, command):
+    """
+    """
+    ssh = ConnectHandler(**device)
+    ssh.enable()
+    prompt = ssh.find_prompt()
+    output = prompt + ssh.send_command(command, strip_prompt=True, strip_command=False)
+    logging.info(output)
+
+def send_command_to_devices(devices, commands_dict, filename, limit=3):
+    """
+    """
+    logging.basicConfig(filename=filename, filemode='w', format='%(message)s', level=logging.INFO, force=True)
+    logging.getLogger('paramiko').setLevel(logging.WARNING)
+
+    with ThreadPoolExecutor(max_workers=limit) as executor:
+        for device in devices:
+            command = commands_dict[device['host']]
+            executor.submit(send_show_command, device, command)
+
+
 commands = {
     "192.168.100.3": "sh run | s ^router ospf",
     "192.168.100.1": "sh ip int br",
     "192.168.100.2": "sh int desc",
 }
+
+if __name__ == '__main__':
+    with open('devices.yaml') as f:
+        devices = yaml.safe_load(f)
+
+    params = {'devices': devices,
+              'commands_dict': commands,
+              'filename': 'test_19_3.txt',
+              'limit': 3}
+    send_command_to_devices(**params)

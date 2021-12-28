@@ -1,0 +1,39 @@
+IOU1#sh ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                172.31.255.1    YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+Loopback1                  172.16.0.1      YES NVRAM  up                    up      
+IOU2#sh int desc
+
+Interface                      Status         Protocol Description
+Et0/0                          up             up       
+Et0/1                          admin down     down     
+Et0/2                          admin down     down     
+Et0/3                          admin down     down     
+Et1/0                          admin down     down     
+Et1/1                          admin down     down     
+Et1/2                          admin down     down     
+Et1/3                          admin down     down     
+Et2/0                          admin down     down     
+Et2/1                          admin down     down     
+Et2/2                          admin down     down     
+Et2/3                          admin down     down     
+Se3/0                          admin down     down     
+Se3/1                          admin down     down     
+Se3/2                          admin down     down     
+Se3/3                          admin down     down     
+IOU3#sh run | s ^router ospf

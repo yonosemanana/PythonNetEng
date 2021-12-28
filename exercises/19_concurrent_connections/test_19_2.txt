@@ -1,0 +1,55 @@
+IOU1#show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                172.31.255.1    YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+Loopback1                  172.16.0.1      YES NVRAM  up                    up      
+IOU2#show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.2   YES NVRAM  up                    up      
+Ethernet0/1                unassigned      YES NVRAM  administratively down down    
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+IOU3#show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.3   YES NVRAM  up                    up      
+Ethernet0/1                unassigned      YES NVRAM  administratively down down    
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    

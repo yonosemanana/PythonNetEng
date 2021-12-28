@@ -105,3 +105,87 @@ R3#
 
 Для выполнения задания можно создавать любые дополнительные функции.
 """
+
+import logging
+import yaml
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from netmiko import ConnectHandler
+
+def send_show_command(device, commands):
+    """
+    """
+    ssh = ConnectHandler(**device)
+    ssh.enable()
+    output = ''
+    for command in commands:
+        prompt = ssh.find_prompt()
+        output = output + '\n' + prompt + ssh.send_command(command, strip_prompt=True, strip_command=False)
+
+    return output
+
+def send_config_command(device, commands):
+    """
+    """
+    ssh = ConnectHandler(**device)
+    ssh.enable()
+    output = ''
+    prompt = ssh.find_prompt()
+    output = output + '\n' + prompt + ssh.send_config_set(commands, strip_prompt=True, strip_command=False)
+
+    return output
+
+def send_commands_to_devices(devices, filename, *, show=None, config=None, limit=3):
+    """
+    """
+    if show and config:
+        raise ValueError
+
+    if isinstance(show, str):
+        commands = [show]
+        send_func = send_show_command
+    elif isinstance(show, list):
+        commands = show
+        send_func = send_show_command
+    elif isinstance(config, str):
+        commands = [config]
+        send_func = send_config_command
+    elif isinstance(config, list):
+        commands = config
+        send_func = send_config_command
+
+    logging.basicConfig(filename=filename, filemode='a', format='%(message)s', level=logging.INFO, force=True)
+    logging.getLogger('paramiko').setLevel(logging.WARNING)
+
+    with ThreadPoolExecutor(max_workers=limit) as executor:
+        futures = []
+        for device in devices:
+            future = executor.submit(send_func, device, commands)
+            futures.append(future)
+
+    for future in as_completed(futures):
+        logging.info(future.result())
+
+
+
+
+if __name__ == '__main__':
+    with open('devices.yaml') as f:
+        devices = yaml.safe_load(f)
+
+    # show_commands = 'show version'
+    show_commands = ['show ip int br', 'show clock']
+
+    # config_commands = 'logging 10.10.5.5'
+    config_commands = ['router ospf 1', 'network 10.0.0.0 0.0.0.255 area 0']
+
+    params_show = {'devices': devices,
+              'show': show_commands,
+              'filename': 'test_19_4.txt',
+              'limit': 3}
+    send_commands_to_devices(**params_show)
+
+    params_config = {'devices': devices,
+              'config': config_commands,
+              'filename': 'test_19_4.txt',
+              'limit': 3}
+    send_commands_to_devices(**params_config)

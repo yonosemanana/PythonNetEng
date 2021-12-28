@@ -1,0 +1,173 @@
+
+IOU3#show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.3   YES NVRAM  up                    up      
+Ethernet0/1                unassigned      YES NVRAM  administratively down down    
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+IOU3#show clock
+*13:19:38.332 CET Tue Dec 28 2021
+
+IOU1#show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                172.31.255.1    YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+Loopback1                  172.16.0.1      YES NVRAM  up                    up      
+IOU1#show clock
+*13:19:38.333 CET Tue Dec 28 2021
+
+IOU2#show ip int br
+
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.2   YES NVRAM  up                    up      
+Ethernet0/1                unassigned      YES NVRAM  administratively down down    
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+IOU2#show clock
+*13:19:38.393 CET Tue Dec 28 2021
+
+IOU2#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+IOU2(config)#router ospf 1
+IOU2(config-router)#network 10.0.0.0 0.0.0.255 area 0
+IOU2(config-router)#end
+IOU2#
+
+IOU1#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+IOU1(config)#router ospf 1
+IOU1(config-router)#network 10.0.0.0 0.0.0.255 area 0
+IOU1(config-router)#end
+IOU1#
+
+IOU3#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+IOU3(config)#router ospf 1
+IOU3(config-router)#network 10.0.0.0 0.0.0.255 area 0
+IOU3(config-router)#end
+IOU3#
+
+IOU3#show ip int br
+
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.3   YES NVRAM  up                    up      
+Ethernet0/1                unassigned      YES NVRAM  administratively down down    
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+IOU3#show clock
+*13:22:46.065 CET Tue Dec 28 2021
+
+IOU1#show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      
+Ethernet0/1                172.31.255.1    YES NVRAM  up                    up      
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+Loopback1                  172.16.0.1      YES NVRAM  up                    up      
+IOU1#show clock
+*13:22:46.075 CET Tue Dec 28 2021
+
+IOU2#show ip int br
+
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.2   YES NVRAM  up                    up      
+Ethernet0/1                unassigned      YES NVRAM  administratively down down    
+Ethernet0/2                unassigned      YES NVRAM  administratively down down    
+Ethernet0/3                unassigned      YES NVRAM  administratively down down    
+Ethernet1/0                unassigned      YES NVRAM  administratively down down    
+Ethernet1/1                unassigned      YES NVRAM  administratively down down    
+Ethernet1/2                unassigned      YES NVRAM  administratively down down    
+Ethernet1/3                unassigned      YES NVRAM  administratively down down    
+Ethernet2/0                unassigned      YES NVRAM  administratively down down    
+Ethernet2/1                unassigned      YES NVRAM  administratively down down    
+Ethernet2/2                unassigned      YES NVRAM  administratively down down    
+Ethernet2/3                unassigned      YES NVRAM  administratively down down    
+Serial3/0                  unassigned      YES NVRAM  administratively down down    
+Serial3/1                  unassigned      YES NVRAM  administratively down down    
+Serial3/2                  unassigned      YES NVRAM  administratively down down    
+Serial3/3                  unassigned      YES NVRAM  administratively down down    
+IOU2#show clock
+*13:22:46.065 CET Tue Dec 28 2021
+
+IOU2#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+IOU2(config)#router ospf 1
+IOU2(config-router)#network 10.0.0.0 0.0.0.255 area 0
+IOU2(config-router)#end
+IOU2#
+
+IOU3#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+IOU3(config)#router ospf 1
+IOU3(config-router)#network 10.0.0.0 0.0.0.255 area 0
+IOU3(config-router)#end
+IOU3#
+
+IOU1#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+IOU1(config)#router ospf 1
+IOU1(config-router)#network 10.0.0.0 0.0.0.255 area 0
+IOU1(config-router)#end
+IOU1#

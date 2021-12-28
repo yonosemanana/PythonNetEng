@@ -51,8 +51,54 @@ O        10.30.0.0/24 [110/20] via 192.168.100.1, 07:12:03, Ethernet0/0
 
 # Этот словарь нужен только для проверки работа кода, в нем можно менять IP-адреса
 # тест берет адреса из файла devices.yaml
+import logging
+import yaml
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from netmiko import ConnectHandler
+
+def send_show_command(device, commands):
+    """
+    """
+    ssh = ConnectHandler(**device)
+    ssh.enable()
+    output = ''
+    for command in commands:
+        prompt = ssh.find_prompt()
+        output = output + '\n' + prompt + ssh.send_command(command, strip_prompt=True, strip_command=False)
+    return output
+
+def send_command_to_devices(devices, commands_dict, filename, limit=3):
+    """
+    """
+    logging.basicConfig(filename=filename, filemode='w', format='%(message)s', level=logging.INFO, force=True)
+    logging.getLogger('paramiko').setLevel(logging.WARNING)
+
+    with ThreadPoolExecutor(max_workers=limit) as executor:
+        futures = []
+        for device in devices:
+            command = commands_dict[device['host']]
+            future = executor.submit(send_show_command, device, command)
+            futures.append(future)
+
+        for future in as_completed(futures):
+            logging.info(future.result())
+
+
+
 commands = {
     "192.168.100.3": ["sh ip int br", "sh ip route | ex -"],
     "192.168.100.1": ["sh ip int br", "sh int desc"],
     "192.168.100.2": ["sh int desc"],
 }
+
+
+
+if __name__ == '__main__':
+    with open('devices.yaml') as f:
+        devices = yaml.safe_load(f)
+
+    params = {'devices': devices,
+              'commands_dict': commands,
+              'filename': 'test_19_3a.txt',
+              'limit': 3}
+    send_command_to_devices(**params)
