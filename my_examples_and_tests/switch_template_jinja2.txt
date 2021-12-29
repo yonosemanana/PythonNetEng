@@ -1,0 +1,23 @@
+{% extends 'base_config.txt' %}
+{% include 'route-maps.txt' %}
+
+{% block bgp_peers %}
+{{ super() }}
+ !
+ neighbor {{bgp.ebgp_fw['ip']}} remote-as {{bgp.ebgp_fw['as']}}
+ neighbor {{bgp.ebgp_fw['ip']}} description {{bgp.ebgp_fw['name']}}
+ neighbor {{bgp.ebgp_fw['ip']}} timers 10 30
+ !
+{% endblock %}
+!
+{% block bgp_AF_ipv4 %}
+  {{ super() }}
+  !
+  neighbor {{bgp.ebgp_fw['ip']}} route-map FW-IN in
+  neighbor {{bgp.ebgp_fw['ip']}} route-map FW-OUT out
+  neighbor {{bgp.ebgp_fw['ip']}} activate
+  neighbor {{bgp.ebgp_fw['ip']}} maximum-prefix 5000 restart 1
+  neighbor {{bgp.ebgp_fw['ip']}} send-community both
+  neighbor {{bgp.ebgp_fw['ip']}} filter-list 1 out
+  !
+{% endblock %}

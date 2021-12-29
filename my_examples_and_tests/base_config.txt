@@ -1,0 +1,440 @@
+{% block services_hostname %}
+!
+no service pad
+service timestamps debug datetime localtime show-timezone year
+service timestamps log datetime localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+ip ssh version 2
+lldp run
+!
+!
+hostname {{hostname}}
+!
+clock timezone UTC 0
+!
+logging buffered 2048000
+!
+{% endblock %}
+
+
+
+{% block aaa_username %}
+!
+enable secret {{enable_secret}}
+!
+username admin secret {{admin_password}}
+aaa new-model
+!
+aaa group server tacacs+ ISEvty
+ server-private {{tacacs_ip1}} key 7 {{tacacs_key}}
+ server-private {{tacacs_ip2}} key 7 {{tacacs_key}}
+ ip tacacs source-interface {{mgmt_interface}}
+!
+aaa authentication login default local
+aaa authentication login VTY group ISEvty local
+aaa authentication login CON group ISEvty local
+aaa authentication enable default group ISEvty enable
+aaa authorization config-commands
+aaa authorization console
+aaa authorization exec default local
+aaa authorization exec VTY group ISEvty local if-authenticated
+aaa authorization exec CON group ISEvty local if-authenticated
+aaa authorization commands 1 VTY group ISEvty local if-authenticated
+aaa authorization commands 15 VTY group ISEvty local if-authenticated
+aaa authorization commands 1 CON group ISEvty local if-authenticated
+aaa authorization commands 15 CON group ISEvty local if-authenticated
+aaa accounting exec default start-stop group ISEvty
+aaa accounting connection default start-stop group ISEvty
+aaa accounting system default start-stop group ISEvty
+aaa accounting commands 1 default start-stop group ISEvty
+aaa accounting commands 8 default start-stop group ISEvty
+aaa accounting commands 15 default start-stop group ISEvty
+aaa accounting network default start-stop group ISEvty
+!
+!
+aaa session-id common
+!
+{% endblock %}
+
+
+
+{% block stack %}
+{% for n, model in stack.items() %}
+!
+switch {{n}} provision {{model}}
+!
+{% endfor %}
+{% endblock %}
+
+
+
+{% block dns_vtp_dhcp_snooping_ntp %}
+!
+ip domain lookup
+ip domain lookup source-interface {{mgmt_interface}}
+!
+ip name-server {{dns_server}}
+
+ip dhcp snooping
+!
+ip domain name {{dns_domain}}
+vtp domain {{site_code}}
+vtp mode transparent
+!
+ntp server {{ntp_server}}
+ntp source {{mgmt_interface}}
+!
+{% endblock %}
+
+
+
+{% block mls_qos %}
+{% endblock %}
+
+
+
+{% block errdisable %}
+!
+errdisable recovery cause udld
+errdisable recovery cause bpduguard
+errdisable recovery cause security-violation
+errdisable recovery cause channel-misconfig
+errdisable recovery cause pagp-flap
+errdisable recovery cause dtp-flap
+errdisable recovery cause link-flap
+errdisable recovery cause sfp-config-mismatch
+errdisable recovery cause gbic-invalid
+errdisable recovery cause l2ptguard
+errdisable recovery cause psecure-violation
+errdisable recovery cause port-mode-failure
+errdisable recovery cause dhcp-rate-limit
+errdisable recovery cause pppoe-ia-rate-limit
+errdisable recovery cause mac-limit
+errdisable recovery cause vmps
+errdisable recovery cause storm-control
+errdisable recovery cause inline-power
+errdisable recovery cause arp-inspection
+errdisable recovery cause link-monitor-failure
+errdisable recovery cause oam-remote-failure
+errdisable recovery cause loopback
+errdisable recovery cause psp
+!
+{% endblock %}
+
+
+
+{% if redundancy == 'sso' %}
+!
+redundancy
+ mode sso
+!
+{% endif %}
+
+
+
+{% block spanning_tree %}
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+{% if switch_role == 'core' %}
+!
+spanning-tree vlan 1-4094 priority 4096
+!
+{% endif %}
+{% endblock %}
+
+
+
+{% block vlans %}
+!
+{% for vlan in vlans %}
+vlan {{vlan.vlan_number}}
+ name {{vlan.name}}
+{% endfor %}
+!
+{% endblock %}
+
+
+
+{% block loopback0 %}
+!
+interface Loopback0
+ description MANAGEMENT
+ ip address {{mgmt_ip}} 255.255.255.255
+!
+{% endblock %}
+
+
+
+{% block ap_ports %}
+!
+{% for intf in ap_interfaces %}
+interface {{intf.port_number}}
+ description {{intf.name}}
+ switchport trunk native vlan {{ap_mgmt_vlan}}
+ switchport trunk allowed vlan {{ap_mgmt_vlan}},{{wireless_vlan}}
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+{% endfor %}
+{% endblock %}
+
+
+
+{% block access_ports %}
+{% for intf_range in access_interfaces%}
+!
+interface range {{intf_range.start_port}} - {{intf_range.end_port}}
+ description USER PORT
+ switchport access vlan {{data_vlan}}
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+{% endfor %}
+{% endblock %}
+
+
+
+{% block WAN_interfaces %}
+!
+interface TwoGigabitEthernet1/0/1
+ description {{remote_hostname}} | {{remote_port}} | ACME-INTERCONNECT
+ no switchport
+ ip address {{ip_mask}}
+interface TwoGigabitEthernet1/0/2
+ description {{remote_hostname}} | {{remote_port}} | ACME-INTERCONNECT
+ no switchport
+ ip address {{ip_mask}}
+!
+{% endblock %}
+
+
+
+{% block LAN_switch_inerconnects %}
+!
+interface {{interface_number}}
+ description {{remote_hostname}} | {{remote_port}} | ACME-INTERCONNECT
+ switchport mode trunk
+ switchport nonegotiate
+{% if switch_role == 'core' %}
+ spanning-tree guard root
+{% endif %}
+{% if switch_role == 'access' %}
+ ip dhcp snooping trust
+{% endif %}
+!
+{% endblock %}
+
+
+
+{% for vlan in vlans %}
+{% if vlan.svi is defined %}
+!
+interface vlan {{vlan.vlan_number}}
+ description {{vlan.name}}
+ ip address {{vlan.svi['ip']}} {{vlan.svi['mask']}}
+ ip helper-address {{dhcp_helper1}}
+ ip helper-address {{dhcp_helper2}}
+ no ip redirects
+ no ip proxy-arp
+!
+{% endif %}
+{% endfor %}
+!
+
+
+
+{% block routing %}
+{% if switch_role == 'core' %}
+!
+ip routing
+!
+ip as-path access-list 1 permit ^$
+!
+{% block bgp %}
+!
+{% block bgp_peers %}
+router bgp {{bgp.as_number}}
+ bgp log-neighbor-changes
+ bgp router-id {{mgmt_ip}}
+{% for neighbor in bgp.neighbors %}
+ neighbor {{neighbor.ip}} remote-as {{neighbor.as}}
+ neighbor {{neighbor.ip}} description {{neighbor.name}}
+ neighbor {{neighbor.ip}} timers 7 21
+{% endfor %}
+ !
+{% endblock %}
+{% block bgp_AF_ipv4 %}
+ !
+ address-family ipv4
+  maximum-paths ibgp 4
+{% for network in bgp.networks %}
+  network {{network.net}} mask {{network.mask}}
+{% endfor %}
+{% for neighbor in bgp.neighbors %}
+  neighbor {{neighbor.ip}} activate
+  neighbor {{neighbor.ip}} next-hop-self
+  neighbor {{neighbor.ip}} soft-reconfiguration inbound
+  neighbor {{neighbor.ip}} maximum-prefix 5000 restart 1
+  neighbor {{neighbor.ip}} send-community both
+  neighbor {{neighbor.ip}} filter-list 1 out
+{% endfor %}
+{% endblock %}
+ exit-address-family
+{% endblock %}
+!
+{% else %}
+!
+ip default-gateway {{default_gateway}}
+!
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+{% block acl %}
+!
+ip access-list standard SNMP-ALLOW
+ remark 10 NMS-1
+ 15 permit 10.97.3.230
+ remark 20 NMS-2
+ 20 permit 10.97.3.81
+ remark 30 NMS-3
+ 30 permit 10.41.59.7
+ remark 40 INVENTORY-1
+ 40 permit 10.41.50.148
+ remark 50 AUTOMATION-1
+ 50 permit 10.41.50.151
+ip access-list standard VTY-ALLOW
+ permit 10.0.0.0 0.255.255.255
+!
+{% endblock %}
+
+{% block logging_snmp %}
+!
+logging source-interface {{mgmt_interface}}
+logging host {{syslog_server}}
+!
+snmp-server community {{snmp_ro_community}} RO SNMP-ALLOW
+snmp-server community {{snmp_rw_community}} RW SNMP-ALLOW
+snmp-server source-interface traps {{mgmt_interface}}
+snmp-server location {{site_code}}
+snmp-server contact {{tech_email}} | SNOW={{snow_queue}}
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps transceiver all
+snmp-server enable traps call-home message-send-fail server-fail
+snmp-server enable traps tty
+snmp-server enable traps eigrp
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf cisco-specific state-change nssa-trans-change
+snmp-server enable traps ospf cisco-specific state-change shamlink interface
+snmp-server enable traps ospf cisco-specific state-change shamlink neighbor
+snmp-server enable traps ospf cisco-specific errors
+snmp-server enable traps ospf cisco-specific retransmit
+snmp-server enable traps ospf cisco-specific lsa
+snmp-server enable traps license
+snmp-server enable traps auth-framework sec-violation
+snmp-server enable traps cef resource-failure peer-state-change peer-fib-state-change inconsistency
+snmp-server enable traps cluster
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps config-ctid
+snmp-server enable traps dot1x auth-fail-vlan guest-vlan no-auth-fail-vlan no-guest-vlan
+snmp-server enable traps energywise
+snmp-server enable traps fru-ctrl
+snmp-server enable traps entity
+snmp-server enable traps event-manager
+snmp-server enable traps hsrp
+snmp-server enable traps ipmulticast
+snmp-server enable traps ike policy add
+snmp-server enable traps ike policy delete
+snmp-server enable traps ike tunnel start
+snmp-server enable traps ike tunnel stop
+snmp-server enable traps ipsec cryptomap add
+snmp-server enable traps ipsec cryptomap delete
+snmp-server enable traps ipsec cryptomap attach
+snmp-server enable traps ipsec cryptomap detach
+snmp-server enable traps ipsec tunnel start
+snmp-server enable traps ipsec tunnel stop
+snmp-server enable traps ipsec too-many-sas
+snmp-server enable traps power-ethernet group 1
+snmp-server enable traps power-ethernet group 2
+snmp-server enable traps power-ethernet police
+snmp-server enable traps pim neighbor-change rp-mapping-change invalid-pim-message
+snmp-server enable traps cpu threshold
+snmp-server enable traps rep
+snmp-server enable traps vstack
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps syslog
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps flash insertion removal
+snmp-server enable traps port-security
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps stackwise
+snmp-server enable traps errdisable
+snmp-server enable traps mac-notification change move threshold
+snmp-server enable traps vlan-membership
+snmp-server host {{nms_server}} {{snmp_ro_community}}
+{% endblock %}
+
+{% block banner_motd %}
+!
+banner motd ^C
+                        {{company_name}} Authorized use ONLY
+
+                                N O T I C E
++----------------------------------------------------------------------------+
+This computer resource is the property of {{company_name}}. Authorized persons may
+use {{company_name}} computer resources only for approved purposes. Misuse or
+misappropriation of such resources is prohibited. {{company_name}} reserves the
+right to audit, access and inspect electronic communications and data
+created, stored, or transmitted on its computer resources in accordance
+with applicable law. {{company_name}} also reserves the right to add necessary
+files and modify the configuration of any connected computer or system to
+ensure the security and integrity of its computer resources.
+BY COMPLETING THE LOGIN PROCESS YOU ARE ACKNOWLEDGING AND CONSENTING TO
+THE PROVISIONS OF THIS NOTICE AND POLICY SOP E-62. IF YOU ARE NOT AN
+AUTHORIZED USER, PLEASE DISCONTINUE THE LOGIN PROCESS NOW.
++----------------------------------------------------------------------------+
+^C
+{% endblock %}
+
+{% block line_con_vty %}
+!
+line con 0
+ exec-timeout 20 0
+ login authentication CON
+ authorization exec CON
+line vty 0 15
+ session-timeout 20
+ exec-timeout 15 0
+ access-class VTY-ALLOW
+ login authentication VTY
+ authorization exec VTY
+ authorization commands 1 VTY
+ authorization commands 15 VTY
+!!!!!! BELOW COMMAND ADD AFTER ENABLING SSH AND GENERATE KEYS !!!!!!!!
+ transport input ssh
+!
+end
+{% endblock %}

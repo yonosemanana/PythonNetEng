@@ -1,0 +1,9 @@
+!
+ip prefix-list DEFAULT seq 5 0.0.0.0/0
+!
+route-map FW-IN permit 10
+ match ip address prefix-list DEFAULT
+!
+route-map FW-OUT permit 10
+!
+

@@ -1,0 +1,125 @@
+hostname: XYZ-CORE-1
+
+enable_secret: cisco
+admin_password: Cisco123
+
+tacacs_ip1: 10.10.10.100
+tacacs_ip2: 10.20.20.100
+tacacs_key: Tacac$+Key1
+
+mgmt_interface: Loopback0
+mgmt_ip: 10.255.255.5
+
+dns_server: 10.199.99.9
+dns_domain: acme.local
+ntp_server: time.nist.gov
+
+site_code: XYZ
+company_name: ACME Corporation
+
+switch_role: core # core, access
+switch_model: 9300 # 9300, 9200, 3850, 3650, 2960
+
+stack:
+  1: c9200-48p
+  2: c9200-48p
+  3: c9200-48p
+
+vlans:
+  - vlan_number: 100
+    name: DATA
+    svi:
+      ip: 10.188.0.254
+      mask: 255.255.255.0
+  - vlan_number: 200
+    name: CRs
+    svi:
+      ip: 10.188.1.62
+      mask: 255.255.255.192
+  - vlan_number: 300
+    name: SERVERS
+    svi:
+      ip: 10.188.2.254
+      mask: 255.255.255.0
+  - vlan_number: 400
+    name: PRINTERS
+    svi:
+      ip: 10.188.1.126
+      mask: 255.255.255.192
+  - vlan_number: 420
+    name: SECURITY
+    svi:
+      ip: 10.188.1.190
+      mask: 255.255.255.192
+  - vlan_number: 900
+    name: NET-MANAGEMENT
+    svi:
+      ip: 10.188.3.254
+      mask: 255.255.255.224
+  - vlan_number: 1900
+    name: WIRELESS
+    svi:
+      ip: 10.188.4.254
+      mask: 255.255.255.0
+  - vlan_number: 1901
+    name: AP-MANAGEMENT
+    svi:
+      ip: 10.188.3.222
+      mask: 255.255.255.224
+
+dhcp_helper1: 10.76.10.1
+dhcp_helper2: 10.77.20.2
+
+ap_mgmt_vlan: 1901
+wireless_vlan: 1900
+data_vlan: 100
+
+
+ap_interfaces:
+  - port_number: GigabitEthernet1/0/46
+    name: ACCESS POINT
+  - port_number: GigabitEthernet1/0/47
+    name: ACCESS POINT
+  - port_number: GigabitEthernet1/0/48
+    name: ACCESS POINT
+  - port_number: GigabitEthernet2/0/46
+    name: ACCESS POINT
+  - port_number: GigabitEthernet2/0/47
+    name: ACCESS POINT
+  - port_number: GigabitEthernet2/0/48
+    name: ACCESS POINT
+
+access_interfaces:
+  - start_port: GigabitEthernet1/0/1
+    end_port: GigabitEthernet1/0/40
+  - start_port: GigabitEthernet2/0/1
+    end_port: GigabitEthernet2/0/40
+
+
+bgp:
+  as_number: 65001
+  neighbors:
+    - ip: 10.90.1.1
+      as: 65001
+      name: XYZ WAN ROUTER
+    - ip: 10.90.2.2
+      as: 65001
+      name: XYZ-CORE-2
+  networks:
+    - net: 10.10.10.0
+      mask: 255.255.255.0
+    - net: 10.90.1.0
+      mask: 255.255.255.252
+    - net: 10.90.2.0
+      mask: 255.255.255.252
+  ebgp_fw:
+    ip: 10.90.0.1
+    as: 65000
+    name: INTERNET FW
+
+syslog_server: 10.50.145.105
+snmp_ro_community: $nmpC0R0
+snmp_rw_community: $nmpC0RW
+tech_email: tech@acme.com
+snow_queue: ACME-NETWORK-T2-SUPPORT
+nms_server: 10.50.142.120
