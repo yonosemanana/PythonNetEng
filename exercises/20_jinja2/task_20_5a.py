@@ -38,6 +38,11 @@
 Они должны быть, но тест упрощен, чтобы было больше свободы выполнения.
 """
 
+from task_20_5 import create_vpn_config
+from netmiko import ConnectHandler
+import yaml
+import re
+
 data = {
     "tun_num": None,
     "wan_ip_1": "192.168.100.1",
@@ -45,3 +50,59 @@ data = {
     "tun_ip_1": "10.0.1.1 255.255.255.252",
     "tun_ip_2": "10.0.1.2 255.255.255.252",
 }
+
+def configure_vpn(src_device_params, dst_device_params, src_template, dst_template, vpn_data_dict):
+    """
+    """
+
+    command = 'show ip int br'
+    regex = re.compile(r'Tunnel(?P<tun>\d+)')
+
+    with ConnectHandler(**src_device_params) as ssh1:
+        ssh1.enable()
+        prompt1 = ssh1.find_prompt()
+        show_int_1 = prompt1 + ssh1.send_command(command, strip_prompt=True, strip_command=False)
+    tunnels1 = regex.findall(show_int_1)
+
+    with ConnectHandler(**dst_device_params) as ssh2:
+        ssh2.enable()
+        prompt2 = ssh2.find_prompt()
+        show_int_2 = prompt2 + ssh2.send_command(command, strip_prompt=True, strip_command=False)
+    tunnels2 = regex.findall(show_int_2)
+
+    # Searching for the least tunnel number common on both source and destination routers.
+    n = 0
+    while True:
+        if str(n) not in tunnels1 and str(n) not in tunnels2:
+            break
+        else:
+            n += 1
+    vpn_data_dict['tun_num'] = n
+
+    config1, config2 = create_vpn_config(src_template, dst_template, vpn_data_dict)
+    config1 = config1.split('\n')
+    config2 = config2.split('\n')
+
+    with ConnectHandler(**src_device_params) as ssh1:
+        ssh1.enable()
+        prompt1 = ssh1.find_prompt()
+        output1 = prompt1 + ssh1.send_config_set(config1, strip_prompt=True, strip_command=False)
+
+    with ConnectHandler(**dst_device_params) as ssh2:
+        ssh2.enable()
+        prompt2 = ssh2.find_prompt()
+        output2 = prompt2 + ssh2.send_config_set(config2, strip_prompt=True, strip_command=False)
+
+    return output1, output2
+
+if __name__ == '__main__':
+    template1 = 'templates/gre_ipsec_vpn_1.txt'
+    template2 = 'templates/gre_ipsec_vpn_2.txt'
+
+    with open('devices.yaml') as f:
+        device1, device2, _ = yaml.safe_load(f)
+
+    output1, output2 = configure_vpn(device1, device2, template1, template2, data)
+    print(output1)
+    print(output2)
+

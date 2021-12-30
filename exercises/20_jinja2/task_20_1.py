@@ -14,7 +14,19 @@
 и данных из файла data_files/for.yml.
 
 """
+from jinja2 import Environment, FileSystemLoader
 import yaml
+import os.path
+
+def generate_config(template, data_dict):
+    """
+    """
+    dirpath, filename = os.path.split(template)
+    environment = Environment(loader=FileSystemLoader(dirpath), trim_blocks=True, lstrip_blocks=True)
+    config_template = environment.get_template(filename)
+    config = config_template.render(data_dict)
+
+    return config
 
 
 # так должен выглядеть вызов функции
