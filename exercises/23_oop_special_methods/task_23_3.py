@@ -132,3 +132,4 @@ if __name__ == '__main__':
     print(t3.topology)
     print(t1.topology)
     print(t2.topology)
+

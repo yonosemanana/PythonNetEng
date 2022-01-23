@@ -74,3 +74,4 @@ if __name__ == '__main__':
     ip1 = IPAddress('10.1.1.1/24')
     # ip2 = IPAddress('10.1.1/24')
     # ip3 = IPAddress('10.1.1.1/240')
+
