@@ -43,3 +43,34 @@ In [6]: ip1 = IPAddress('10.1.1.1/240')
 ValueError: Incorrect mask
 
 """
+import re
+
+regex = r'^(?P<ip>\S+)/(?P<mask>\d+)$'
+regex_ip = r'^(?P<ip>(\d+\.){3}\d+)$'
+
+class IPAddress:
+    def __init__(self, addr_mask):
+        match = re.search(regex, addr_mask)
+        if not match:
+            raise ValueError
+        else:
+            mask = match.group('mask')
+            if int(mask) < 0 or int(mask) > 32:
+                raise ValueError('Incorrect mask')
+            else:
+                match_ip = re.search(regex_ip, match.group('ip'))
+                if not match_ip:
+                    raise ValueError('Incorrect IPv4 address')
+                else:
+                    ip = match_ip.group('ip')
+                    for octet in ip.split('.'):
+                        if int(octet) < 0 or int(octet) > 255:
+                            raise ValueError('Incorrect IPv4 address')
+                    self.ip = ip
+                    self.mask = int(mask)
+
+
+if __name__ == '__main__':
+    ip1 = IPAddress('10.1.1.1/24')
+    # ip2 = IPAddress('10.1.1/24')
+    # ip3 = IPAddress('10.1.1.1/240')
