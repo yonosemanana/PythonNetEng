@@ -1,0 +1,17 @@
+Value Filldown LocalHost (\S+)
+Value Required RemoteHost (\S+)
+Value MgmtIP (\S+)
+Value Platform (.*)
+Value RemoteIntf (\S+)
+Value LocalIntf (\S+)
+Value IOSVersion (\S+)
+
+Start
+ ^${LocalHost}[>#]
+ ^Device ID: ${RemoteHost}
+ ^  IP address: ${MgmtIP}
+ ^Platform: ${Platform},
+ ^Interface: ${RemoteIntf},  Port ID \(outgoing port\): ${LocalIntf}
+ ^.*Version ${IOSVersion}, -> Record
+
+End

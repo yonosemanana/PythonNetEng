@@ -1,0 +1,8 @@
+Template, Host, Vendor, Command
+show_cdp_neighbor.template, .*, Cisco, sh[[ow]] cdp nei[[ghbor]] de[[tail]]
+show_clock.template, .*, Cisco, sh[[ow]] clo[[ck]]
+show_ip_int_br.template, .*, Cisco, sh[[ow]] ip int[[erface]] br[[ief]]
+show_ip_route_ospf.template, .*, Cisco, sh[[ow]] ip ro[[ute]] o[[spf]]
+traceroute.template, .*, Cisco, trace[[route]]
+traceroute.template, .*, Linux, trace[[route]]
+

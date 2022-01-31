@@ -1,0 +1,9 @@
+Value Intf (\S+\d+)
+Value IPAddr (\S+)
+Value Status (\S+)
+Value LineProtocol (\S+)
+
+Start
+ ^${Intf} +${IPAddr} +\S+ +\S+ +${Status} +${LineProtocol} -> Record
+
+End

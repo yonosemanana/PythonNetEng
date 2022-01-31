@@ -1,0 +1,13 @@
+Value Prefix (\S+)
+Value Mask (\d+)
+Value AD (\d+)
+Value Metric (\d+)
+Value List NextHop (\S+)
+Value OutInterface (\S+)
+
+Start
+ ^O -> Continue.Record
+ ^O +${Prefix}/${Mask} +\[${AD}/${Metric}\] +via +${NextHop}, \S+, ${OutInterface}
+ ^ +\[${AD}/${Metric}\] +via +${NextHop}, \S+, ${OutInterface}
+
+End

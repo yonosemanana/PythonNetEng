@@ -1,0 +1,7 @@
+Value HopNumber (\d+)
+Value IPaddress (((\d+\.){3}\d+)|\*)
+
+Start
+  ^ *${HopNumber} +${IPaddress} .*$$ -> Next.Record
+
+End
