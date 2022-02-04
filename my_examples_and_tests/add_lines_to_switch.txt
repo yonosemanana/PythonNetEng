@@ -1,0 +1,4 @@
+insert into switch values ('sw3', '00:01:02:FF:EE:01', 'HP 3100', 'London');
+insert into switch values ('sw4', '00:01:02:FF:EE:02', 'Cisco 3850', 'Madrid');
+insert into switch values ('sw5', '00:01:02:FF:EE:03', 'Extreme x380', 'Newcastle');
+
